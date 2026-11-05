@@ -228,12 +228,21 @@ export default function Home() {
               </div>
 
               <div className="tags-cloud">
-                <span className="tag-pill tag-dark">Outbound Sales</span>
-                <span className="tag-pill tag-orange">B2B SaaS</span>
-                <span className="tag-pill tag-outline">GTM Campaigns</span>
-                <span className="tag-pill tag-outline">CRM & AI</span>
-                <span className="tag-pill tag-dark">10+ Team Lead</span>
-                <span className="tag-pill tag-orange">Partnerships</span>
+                {(personalInfo.heroTags && personalInfo.heroTags.length > 0 ? personalInfo.heroTags : [
+                  "Sales & Marketing",
+                  "B2B Business Development",
+                  "SaaS & Tech Sales",
+                  "Digital Marketing"
+                ]).map((tag, idx) => {
+                  const label = typeof tag === 'string' ? tag : tag.label;
+                  const styles = ['tag-dark', 'tag-orange', 'tag-outline', 'tag-orange'];
+                  const style = typeof tag === 'object' && tag.style ? tag.style : styles[idx % styles.length];
+                  return (
+                    <span key={idx} className={`tag-pill ${style}`}>
+                      {label}
+                    </span>
+                  );
+                })}
               </div>
             </motion.div>
 

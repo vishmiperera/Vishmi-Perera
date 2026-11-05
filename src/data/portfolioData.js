@@ -10,7 +10,13 @@ export const personalInfo = {
   experienceYears: "8+",
   mainIntro: `My name is Vishmi Perera. I’m a sales and marketing professional with 8+ years of cross-border experience spanning B2B sales, SaaS, technology services, digital marketing, account management, and partnerships.`,
   detailedIntro: `I combine strategic planning with hands-on execution, from cold calling and outbound prospecting to digital campaigns, CRM management, and customer relationship development. I have on-site work experience in the United Kingdom 🇬🇧, Netherlands 🇳🇱, and Dubai, UAE 🇦🇪, alongside experience in Sri Lanka 🇱🇰. My campaign and stakeholder exposure also covers Singapore 🇸🇬, Australia 🇦🇺, and the wider EMEA region.`,
-  leadershipScope: "Guided 5 sales and marketing specialists alongside 5 software developers."
+  leadershipScope: "Guided 5 sales and marketing specialists alongside 5 software developers.",
+  heroTags: [
+    "Sales & Marketing",
+    "B2B Business Development",
+    "SaaS & Tech Sales",
+    "Digital Marketing"
+  ]
 };
 
 export const internationalExposure = [

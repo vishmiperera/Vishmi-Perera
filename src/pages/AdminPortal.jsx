@@ -873,6 +873,26 @@ export const faqs = ${JSON.stringify(formData.faqs, null, 2)};
                   })}
                 />
               </div>
+
+              <div className="form-group" style={{ gridColumn: 'span 2' }}>
+                <label className="form-label">Hero Tag Pills (Floating Badges beside photo)</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Sales & Marketing | B2B Business Development | SaaS & Tech Sales | Digital Marketing"
+                  value={Array.isArray(formData.personalInfo.heroTags) ? formData.personalInfo.heroTags.join(' | ') : (formData.personalInfo.heroTags || '')}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    personalInfo: {
+                      ...formData.personalInfo,
+                      heroTags: e.target.value.split(/[,|]/).map(s => s.trim()).filter(Boolean)
+                    }
+                  })}
+                />
+                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
+                  Enter tags separated by a pipe symbol (|) or comma. Currently: Sales &amp; Marketing | B2B Business Development | SaaS &amp; Tech Sales | Digital Marketing
+                </span>
+              </div>
             </div>
 
             {/* Profile Image Uploader & Live Preview */}

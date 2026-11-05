@@ -780,7 +780,7 @@ body.cursor-hover .cursor-dot {
   flex-wrap: wrap;
   gap: 8px;
   justify-content: flex-end;
-  max-width: 290px;
+  max-width: 320px;
 }
 
 .tag-pill {
