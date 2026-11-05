@@ -29,7 +29,8 @@ import {
   RefreshCw,
   Copy,
   Image as ImageIcon,
-  FileCode
+  FileCode,
+  Download
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { themePresets } from '../data/themePresets';
@@ -149,11 +150,10 @@ export default function AdminPortal() {
 
   // Custom Color Apply
   const handleApplyCustomColor = () => {
-    // Generate simple hover and light tints from hex
     const customPalette = {
       accent: customHex,
       hover: customHex,
-      light: `${customHex}25`, // 15% opacity hex
+      light: `${customHex}25`,
       glow: `${customHex}45`
     };
     setFormData({
@@ -162,6 +162,40 @@ export default function AdminPortal() {
       customThemeColors: customPalette
     });
     setCustomColors(customPalette);
+  };
+
+  // Download Updated portfolioData.js code file directly!
+  const handleDownloadCodeFile = () => {
+    const jsContent = `export const personalInfo = ${JSON.stringify(formData.personalInfo, null, 2)};
+
+export const internationalExposure = ${JSON.stringify(formData.internationalExposure, null, 2)};
+
+export const coreExpertise = ${JSON.stringify(formData.coreExpertise, null, 2)};
+
+export const commercialResults = ${JSON.stringify(formData.commercialResults, null, 2)};
+
+export const awardsList = ${JSON.stringify(formData.awardsList, null, 2)};
+
+export const workExperience = ${JSON.stringify(formData.workExperience, null, 2)};
+
+export const additionalExperience = ${JSON.stringify(formData.additionalExperience, null, 2)};
+
+export const toolsList = ${JSON.stringify(formData.toolsList, null, 2)};
+
+export const educationList = ${JSON.stringify(formData.educationList, null, 2)};
+
+export const faqs = ${JSON.stringify(formData.faqs, null, 2)};
+`;
+
+    const blob = new Blob([jsContent], { type: 'text/javascript' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'portfolioData.js';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
   };
 
   // Export JSON Backup
@@ -373,14 +407,19 @@ export default function AdminPortal() {
               <span>Preview Live Site</span>
             </Link>
 
+            <button onClick={handleDownloadCodeFile} className="admin-action-btn" title="Download updated portfolioData.js code file to commit directly to GitHub">
+              <Download size={15} />
+              <span>Download Code File</span>
+            </button>
+
             <button onClick={handleExportJSON} className="admin-action-btn" title="Download JSON backup">
               <FileCode size={15} />
-              <span>Export Backup</span>
+              <span>Export JSON</span>
             </button>
 
             <label className="admin-action-btn" style={{ cursor: 'pointer', margin: 0 }} title="Upload JSON backup">
               <Upload size={15} />
-              <span>Import Backup</span>
+              <span>Import JSON</span>
               <input type="file" accept=".json" onChange={handleImportJSON} style={{ display: 'none' }} />
             </label>
 
@@ -426,7 +465,7 @@ export default function AdminPortal() {
               <span>Portfolio Accent Color Themes</span>
             </h3>
             <p className="admin-card-sub">
-              Choose from 7 expertly crafted professional presets, or choose a custom brand accent color. This immediately updates buttons, badges, highlights, and borders across the entire portfolio.
+              Choose from 7 expertly crafted professional presets, or choose a custom brand accent color. This immediately updates buttons, badges, highlights, and borders across the entire portfolio for all visitors.
             </p>
 
             {/* Presets Grid */}
@@ -578,7 +617,7 @@ export default function AdminPortal() {
               <span>Supabase Cloud Database Synchronization</span>
             </h3>
             <p className="admin-card-sub">
-              Sync all portfolio customizations to a real cloud PostgreSQL database so changes appear live for visitors worldwide across any device.
+              Your database is pre-configured and active! All edits in this portal save directly to Supabase so visitors worldwide see updates automatically.
             </p>
 
             {/* Connection Status Banner */}
@@ -610,7 +649,7 @@ export default function AdminPortal() {
                     {isSupabaseConnected ? 'Supabase Database Connected & In Sync' : 'Local Storage Fallback Active'}
                   </div>
                   <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                    {lastSyncedAt ? `Last cloud sync: ${new Date(lastSyncedAt).toLocaleTimeString()}` : 'Not yet synced with remote database.'}
+                    {lastSyncedAt ? `Last cloud sync: ${new Date(lastSyncedAt).toLocaleTimeString()}` : 'Connected to project tpezbxwwylkaheuxefkd.'}
                   </div>
                 </div>
               </div>
@@ -639,60 +678,27 @@ export default function AdminPortal() {
               )}
             </div>
 
-            {/* Setup Instructions Walkthrough */}
+            {/* Permanent Code File Export Option */}
             <div style={{ background: 'var(--bg-primary)', padding: '24px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-light)', marginBottom: '28px' }}>
-              <h4 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '14px', color: 'var(--text-main)' }}>
-                How to Connect Your Supabase Project (3 Simple Steps):
-              </h4>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '0.9rem', color: 'var(--text-main)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '14px' }}>
                 <div>
-                  <strong>Step 1:</strong> Go to <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-orange)', textDecoration: 'underline' }}>supabase.com</a>, log in and create a new free project.
+                  <h4 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'var(--text-main)', marginBottom: '4px' }}>
+                    Want to show updates WITHOUT connecting to Supabase?
+                  </h4>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', maxWidth: '640px' }}>
+                    Click <strong>"Download Updated Code File"</strong> below to get the JavaScript data file containing your latest changes. Replace <code>src/data/portfolioData.js</code> in your project, push to GitHub, and your site will display your updates statically even without Supabase!
+                  </p>
                 </div>
 
-                <div>
-                  <strong>Step 2:</strong> In your Supabase Dashboard, click <strong>SQL Editor</strong> on the left, paste the SQL script below, and click <strong>Run</strong>:
-                  <div style={{ position: 'relative', marginTop: '8px' }}>
-                    <pre
-                      style={{
-                        background: 'var(--dark-primary)',
-                        color: '#FFFFFF',
-                        padding: '16px',
-                        borderRadius: 'var(--radius-md)',
-                        fontSize: '0.8rem',
-                        overflowX: 'auto',
-                        maxHeight: '160px'
-                      }}
-                    >
-                      {SUPABASE_SQL_SCRIPT}
-                    </pre>
-                    <button
-                      type="button"
-                      onClick={handleCopySql}
-                      style={{
-                        position: 'absolute',
-                        top: '10px',
-                        right: '10px',
-                        background: 'rgba(255,255,255,0.15)',
-                        color: '#FFFFFF',
-                        padding: '6px 12px',
-                        borderRadius: 'var(--radius-sm)',
-                        fontSize: '0.78rem',
-                        cursor: 'pointer',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '6px'
-                      }}
-                    >
-                      {copiedSql ? <Check size={14} /> : <Copy size={14} />}
-                      <span>{copiedSql ? 'Copied SQL!' : 'Copy SQL'}</span>
-                    </button>
-                  </div>
-                </div>
-
-                <div>
-                  <strong>Step 3:</strong> In Supabase, go to <strong>Project Settings → API</strong>. Copy your <strong>Project URL</strong> and <strong>anon / public Key</strong>, paste them below, and click Connect!
-                </div>
+                <button
+                  type="button"
+                  onClick={handleDownloadCodeFile}
+                  className="btn-primary"
+                  style={{ padding: '10px 20px', fontSize: '0.9rem' }}
+                >
+                  <Download size={16} />
+                  <span>Download portfolioData.js</span>
+                </button>
               </div>
             </div>
 
@@ -746,7 +752,7 @@ export default function AdminPortal() {
                 style={{ padding: '12px 28px' }}
               >
                 <Cloud size={18} />
-                <span>{connectingSupabase ? 'Testing Connection...' : 'Connect & Sync with Supabase'}</span>
+                <span>{connectingSupabase ? 'Testing Connection...' : 'Re-Connect / Test Supabase'}</span>
               </button>
             </form>
           </div>
