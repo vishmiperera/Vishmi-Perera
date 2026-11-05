@@ -171,7 +171,7 @@ export default function Home() {
               className="hero-portrait-wrapper"
             >
               {/* Rotating Circular Stamp Badge */}
-              <Link to="/contact" className="stamp-badge" title="Hire Vishmi Perera">
+              <Link to="/about" className="stamp-badge" title="Get to know me • Let's talk">
                 <svg viewBox="0 0 100 100">
                   <path
                     id="circlePath"
@@ -179,9 +179,9 @@ export default function Home() {
                     stroke="none"
                     d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
                   />
-                  <text font-size="10.8" font-weight="700" letter-spacing="2.2" fill="var(--text-main)">
+                  <text font-size="10.8" font-weight="700" letter-spacing="3" fill="var(--text-main)">
                     <textPath href="#circlePath">
-                      • HIRE ME • LET'S TALK • B2B SALES •
+                      • GET TO KNOW ME • LET'S TALK •
                     </textPath>
                   </text>
                 </svg>
