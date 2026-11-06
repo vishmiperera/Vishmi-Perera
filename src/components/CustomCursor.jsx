@@ -5,7 +5,7 @@ export default function CustomCursor() {
   const followerRef = useRef(null);
 
   useEffect(() => {
-    // Disable cursor for touch / mobile
+    // Disable custom cursor for touch/mobile devices
     if (window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 992) {
       return;
     }
@@ -15,10 +15,18 @@ export default function CustomCursor() {
     let followerX = mouseX;
     let followerY = mouseY;
     let animId;
+    let hasMoved = false;
 
     const onMouseMove = (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+
+      if (!hasMoved) {
+        hasMoved = true;
+        followerX = mouseX;
+        followerY = mouseY;
+        document.body.classList.add('cursor-active');
+      }
 
       if (dotRef.current) {
         dotRef.current.style.left = `${mouseX}px`;
@@ -27,8 +35,8 @@ export default function CustomCursor() {
     };
 
     const render = () => {
-      followerX += (mouseX - followerX) * 0.15;
-      followerY += (mouseY - followerY) * 0.15;
+      followerX += (mouseX - followerX) * 0.18;
+      followerY += (mouseY - followerY) * 0.18;
 
       if (followerRef.current) {
         followerRef.current.style.left = `${followerX}px`;
@@ -38,37 +46,55 @@ export default function CustomCursor() {
       animId = requestAnimationFrame(render);
     };
 
-    window.addEventListener('mousemove', onMouseMove);
-    animId = requestAnimationFrame(render);
+    // Smooth delegation for interactive hover targets
+    const interactiveSelector = 'a, button, input, textarea, select, [role="button"], .btn, .card, .service-card, .tool-card, .filter-btn, .social-icon-btn, .stamp-badge, .nav-link, .nav-action-btn, .theme-swatch, .interactive-target, [data-cursor="hover"]';
 
-    const onMouseEnter = () => document.body.classList.add('cursor-hover');
-    const onMouseLeave = () => document.body.classList.remove('cursor-hover');
-
-    const attachHoverListeners = () => {
-      const targets = document.querySelectorAll('a, button, .service-card, .tool-card, .filter-btn, .social-icon-btn, .stamp-badge, input, textarea, select');
-      targets.forEach(el => {
-        el.addEventListener('mouseenter', onMouseEnter);
-        el.addEventListener('mouseleave', onMouseLeave);
-      });
-      return targets;
+    const onMouseOver = (e) => {
+      if (e.target && e.target.closest && e.target.closest(interactiveSelector)) {
+        document.body.classList.add('cursor-hover');
+      }
     };
 
-    let targets = attachHoverListeners();
-    // Observe DOM changes to re-attach if dynamic content loads
-    const observer = new MutationObserver(() => {
-      targets = attachHoverListeners();
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
+    const onMouseOut = (e) => {
+      const currentTarget = e.target && e.target.closest ? e.target.closest(interactiveSelector) : null;
+      if (currentTarget) {
+        const nextTarget = e.relatedTarget && e.relatedTarget.closest ? e.relatedTarget.closest(interactiveSelector) : null;
+        if (!nextTarget) {
+          document.body.classList.remove('cursor-hover');
+        }
+      }
+    };
+
+    const onMouseDown = () => document.body.classList.add('cursor-down');
+    const onMouseUp = () => document.body.classList.remove('cursor-down');
+
+    const onMouseLeaveWindow = () => document.body.classList.remove('cursor-active');
+    const onMouseEnterWindow = () => {
+      if (hasMoved) {
+        document.body.classList.add('cursor-active');
+      }
+    };
+
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('mouseover', onMouseOver);
+    document.addEventListener('mouseout', onMouseOut);
+    document.documentElement.addEventListener('mouseleave', onMouseLeaveWindow);
+    document.documentElement.addEventListener('mouseenter', onMouseEnterWindow);
+
+    animId = requestAnimationFrame(render);
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mouseover', onMouseOver);
+      document.removeEventListener('mouseout', onMouseOut);
+      document.documentElement.removeEventListener('mouseleave', onMouseLeaveWindow);
+      document.documentElement.removeEventListener('mouseenter', onMouseEnterWindow);
       cancelAnimationFrame(animId);
-      observer.disconnect();
-      targets.forEach(el => {
-        el.removeEventListener('mouseenter', onMouseEnter);
-        el.removeEventListener('mouseleave', onMouseLeave);
-      });
-      document.body.classList.remove('cursor-hover');
+      document.body.classList.remove('cursor-active', 'cursor-hover', 'cursor-down');
     };
   }, []);
 
