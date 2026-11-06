@@ -78,7 +78,7 @@ export function PortfolioProvider({ children }) {
       applyThemeColors(portfolioData.customThemeColors);
     } else {
       const preset = themePresets.find(t => t.id === portfolioData.activeThemeId) || themePresets[0];
-      applyThemeColors(preset.colors);
+      applyThemeColors(preset);
     }
   }, [portfolioData.activeThemeId, portfolioData.customThemeColors]);
 

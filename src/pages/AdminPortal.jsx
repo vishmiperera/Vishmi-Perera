@@ -40,7 +40,7 @@ import {
   Clock
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
-import { themePresets } from '../data/themePresets';
+import { themePresets, generateHarmonicPalette } from '../data/themePresets';
 import { SUPABASE_SQL_SCRIPT } from '../lib/supabase';
 
 export default function AdminPortal() {
@@ -202,12 +202,7 @@ export default function AdminPortal() {
 
   // Custom Color Apply
   const handleApplyCustomColor = () => {
-    const customPalette = {
-      accent: customHex,
-      hover: customHex,
-      light: `${customHex}25`,
-      glow: `${customHex}45`
-    };
+    const customPalette = generateHarmonicPalette(customHex);
     setFormData({
       ...formData,
       activeThemeId: 'custom',
