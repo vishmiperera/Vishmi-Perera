@@ -17,7 +17,7 @@ import { usePortfolio } from '../context/PortfolioContext';
 
 export default function ContactPage() {
   const { portfolioData } = usePortfolio();
-  const { personalInfo, faqs } = portfolioData;
+  const { personalInfo, faqs, contactSection } = portfolioData;
 
   const [activeFaq, setActiveFaq] = useState(0);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -72,10 +72,10 @@ export default function ContactPage() {
             <span className="active">Contact & Inquiries</span>
           </div>
           <h1 className="page-hero-title" style={{ marginTop: '16px' }}>
-            Let’s Start a <span className="highlight">Conversation</span>
+            {contactSection?.title || 'Let’s Start a Conversation'}
           </h1>
           <p className="page-hero-subtitle">
-            Available for full-time leadership roles, international B2B sales development, go-to-market advisory, and strategic commercial consulting.
+            {contactSection?.subtitle || 'Available for full-time leadership roles, international B2B sales development, go-to-market advisory, and strategic commercial consulting.'}
           </p>
         </div>
       </section>
@@ -89,11 +89,11 @@ export default function ContactPage() {
               {/* Direct Details */}
               <div className="contact-info-col">
                 <div className="section-tag" style={{ marginBottom: 0 }}>
-                  <span className="dot" /> Direct Channels
+                  <span className="dot" /> {contactSection?.badge || 'Direct Channels'}
                 </div>
-                <h2>Reach Out <span>Directly</span></h2>
+                <h2>{contactSection?.channelTitle || 'Reach Out Directly'}</h2>
                 <p>
-                  I respond promptly to inquiries regarding commercial sales leadership, international expansion, and high-velocity outbound programs.
+                  {contactSection?.channelDesc || 'I respond promptly to inquiries regarding commercial sales leadership, international expansion, and high-velocity outbound programs.'}
                 </p>
 
                 <div className="contact-channel-list">
@@ -133,7 +133,7 @@ export default function ContactPage() {
                     <div className="contact-channel-icon"><Clock size={18} /></div>
                     <div>
                       <div className="channel-label">Primary Timezone</div>
-                      <div className="channel-val">{personalInfo.location} (GMT+5:30) • Flexible for UK/EU/US Hours</div>
+                      <div className="channel-val">{personalInfo.location} ({contactSection?.timezoneNote || 'GMT+5:30 • Flexible for UK/EU/US Hours'})</div>
                     </div>
                   </div>
 
@@ -210,12 +210,19 @@ export default function ContactPage() {
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     >
-                      <option value="Executive Sales & Marketing Leadership Role">Executive Sales & Marketing Leadership Role</option>
-                      <option value="B2B Outbound Sales & Cold Calling Program">B2B Outbound Sales & Cold Calling Program</option>
-                      <option value="International GTM & Partnership Development">International GTM & Partnership Development</option>
-                      <option value="CRM Architecture, Reporting & AI Automation">CRM Architecture, Reporting & AI Automation</option>
-                      <option value="Commercial Advisory / Consulting">Commercial Advisory / Consulting</option>
-                      <option value="Other / General Inquiries">Other / General Inquiries</option>
+                      {(contactSection?.inquirySubjects && contactSection.inquirySubjects.length > 0
+                        ? contactSection.inquirySubjects
+                        : [
+                          "Executive Sales & Marketing Leadership Role",
+                          "B2B Outbound Sales & Cold Calling Program",
+                          "International GTM & Partnership Development",
+                          "CRM Architecture, Reporting & AI Automation",
+                          "Commercial Advisory / Consulting",
+                          "Other / General Inquiries"
+                        ]
+                      ).map((subj, idx) => (
+                        <option key={idx} value={subj}>{subj}</option>
+                      ))}
                     </select>
                   </div>
 

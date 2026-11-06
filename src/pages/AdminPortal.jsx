@@ -32,7 +32,12 @@ import {
   FileCode,
   Download,
   FileText,
-  FileDown
+  FileDown,
+  Mail,
+  Phone,
+  MessageSquare,
+  Send,
+  Clock
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { themePresets } from '../data/themePresets';
@@ -215,6 +220,8 @@ export default function AdminPortal() {
   const handleDownloadCodeFile = () => {
     const jsContent = `export const personalInfo = ${JSON.stringify(formData.personalInfo, null, 2)};
 
+export const contactSection = ${JSON.stringify(formData.contactSection, null, 2)};
+
 export const internationalExposure = ${JSON.stringify(formData.internationalExposure, null, 2)};
 
 export const coreExpertise = ${JSON.stringify(formData.coreExpertise, null, 2)};
@@ -367,13 +374,14 @@ export const faqs = ${JSON.stringify(formData.faqs, null, 2)};
     { id: 'theme', label: 'Color Themes', icon: Palette },
     { id: 'supabase', label: 'Supabase Cloud Sync', icon: Cloud },
     { id: 'profile', label: 'Profile & Hero', icon: User },
+    { id: 'contact', label: 'Contact & Inquiries', icon: Mail },
     { id: 'services', label: 'Services (7)', icon: Briefcase },
     { id: 'results', label: 'Commercial Results', icon: TrendingUp },
     { id: 'experience', label: 'Work History', icon: Briefcase },
     { id: 'awards', label: 'Awards (5)', icon: Award },
     { id: 'international', label: 'Global Footprint', icon: Globe },
     { id: 'tools', label: 'Tools & Stack', icon: Wrench },
-    { id: 'education', label: 'Education & FAQs', icon: GraduationCap }
+    { id: 'education', label: 'Academic Degrees', icon: GraduationCap }
   ];
 
   return (
@@ -1111,6 +1119,326 @@ export const faqs = ${JSON.stringify(formData.faqs, null, 2)};
                 />
               </div>
             </div>
+          </div>
+        )}
+
+        {/* Tab: Contact & Inquiries */}
+        {activeTab === 'contact' && (
+          <div className="admin-section-card">
+            <div style={{ marginBottom: '24px' }}>
+              <h3 className="admin-card-heading">
+                <Mail size={20} color="var(--accent-orange)" />
+                <span>Contact Channels & Messaging</span>
+              </h3>
+              <p className="admin-card-sub">
+                Manage your public contact channels, page headlines, inquiry dropdown options, and recruiter FAQs.
+              </p>
+            </div>
+
+            {/* Direct Communication Channels */}
+            <div style={{ marginBottom: '28px', padding: '22px', background: 'var(--bg-primary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Phone size={17} color="var(--accent-orange)" />
+                <span>Direct Contact Channels</span>
+              </h4>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
+                <div className="form-group">
+                  <label className="form-label">Primary Email Address</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    value={formData.personalInfo.email}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      personalInfo: { ...formData.personalInfo, email: e.target.value }
+                    })}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Mobile & Direct Phone Line</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={formData.personalInfo.phone}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      personalInfo: { ...formData.personalInfo, phone: e.target.value }
+                    })}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">WhatsApp Number (e.g. +94 77 460 2795)</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={formData.personalInfo.whatsapp || formData.personalInfo.phone}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      personalInfo: { ...formData.personalInfo, whatsapp: e.target.value }
+                    })}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">LinkedIn Profile URL</label>
+                  <input
+                    type="url"
+                    className="form-control"
+                    value={formData.personalInfo.linkedin}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      personalInfo: { ...formData.personalInfo, linkedin: e.target.value }
+                    })}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Base Location (e.g. Colombo, Sri Lanka)</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={formData.personalInfo.location}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      personalInfo: { ...formData.personalInfo, location: e.target.value }
+                    })}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Timezone & Working Availability Note</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={formData.contactSection?.timezoneNote || 'GMT+5:30 • Flexible for UK/EU/US Hours'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      contactSection: { ...formData.contactSection, timezoneNote: e.target.value }
+                    })}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Contact Page Headings */}
+            <div style={{ marginBottom: '28px', padding: '22px', background: 'var(--bg-primary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Send size={17} color="var(--accent-orange)" />
+                <span>Dedicated Contact Page Copy (/contact)</span>
+              </h4>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+                <div className="form-group">
+                  <label className="form-label">Page Hero Headline</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={formData.contactSection?.title || 'Let’s Start a Conversation'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      contactSection: { ...formData.contactSection, title: e.target.value }
+                    })}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Channels Box Headline</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={formData.contactSection?.channelTitle || 'Reach Out Directly'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      contactSection: { ...formData.contactSection, channelTitle: e.target.value }
+                    })}
+                  />
+                </div>
+
+                <div className="form-group" style={{ gridColumn: 'span 2' }}>
+                  <label className="form-label">Page Hero Subtitle</label>
+                  <textarea
+                    className="form-control"
+                    rows={2}
+                    value={formData.contactSection?.subtitle || 'Available for full-time leadership roles, international B2B sales development, go-to-market advisory, and strategic commercial consulting.'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      contactSection: { ...formData.contactSection, subtitle: e.target.value }
+                    })}
+                  />
+                </div>
+
+                <div className="form-group" style={{ gridColumn: 'span 2' }}>
+                  <label className="form-label">Channels Box Description</label>
+                  <textarea
+                    className="form-control"
+                    rows={2}
+                    value={formData.contactSection?.channelDesc || 'I respond promptly to inquiries regarding commercial sales leadership, international expansion, and high-velocity outbound programs.'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      contactSection: { ...formData.contactSection, channelDesc: e.target.value }
+                    })}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Home Page Contact Banner Copy */}
+            <div style={{ marginBottom: '28px', padding: '22px', background: 'var(--bg-primary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <MessageSquare size={17} color="var(--accent-orange)" />
+                <span>Home Page Contact Banner Copy</span>
+              </h4>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+                <div className="form-group">
+                  <label className="form-label">Home Section Badge Tag</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={formData.contactSection?.homeBadge || 'Get In Touch'}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      contactSection: { ...formData.contactSection, homeBadge: e.target.value }
+                    })}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Home Section Headline</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={formData.contactSection?.homeTitle || "Let's Drive Revenue & Growth Together."}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      contactSection: { ...formData.contactSection, homeTitle: e.target.value }
+                    })}
+                  />
+                </div>
+
+                <div className="form-group" style={{ gridColumn: 'span 2' }}>
+                  <label className="form-label">Home Section Description</label>
+                  <textarea
+                    className="form-control"
+                    rows={2}
+                    value={formData.contactSection?.homeDesc || "Whether you are expanding into international B2B markets, ramping outbound prospecting, or optimizing your commercial marketing engine, let’s connect."}
+                    onChange={(e) => setFormData({
+                      ...formData,
+                      contactSection: { ...formData.contactSection, homeDesc: e.target.value }
+                    })}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Inquiry Form Dropdown Subjects */}
+            <div style={{ marginBottom: '28px', padding: '22px', background: 'var(--bg-primary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 800, marginBottom: '10px' }}>
+                Inquiry Form Dropdown Options
+              </h4>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '14px' }}>
+                Enter inquiry options separated by a pipe (|) or commas.
+              </p>
+              <input
+                type="text"
+                className="form-control"
+                value={(formData.contactSection?.inquirySubjects || [
+                  "Executive Sales & Marketing Leadership Role",
+                  "B2B Outbound Sales & Cold Calling Program",
+                  "International GTM & Partnership Development",
+                  "CRM Architecture, Reporting & AI Automation",
+                  "Commercial Advisory / Consulting",
+                  "Other / General Inquiries"
+                ]).join(' | ')}
+                onChange={(e) => setFormData({
+                  ...formData,
+                  contactSection: {
+                    ...formData.contactSection,
+                    inquirySubjects: e.target.value.split(/[,|]/).map(s => s.trim()).filter(Boolean)
+                  }
+                })}
+              />
+            </div>
+
+            {/* Frequently Asked Questions (FAQs) Manager */}
+            <div style={{ padding: '22px', background: 'var(--bg-primary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
+                <h4 style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0 }}>
+                  Recruiter & Client FAQs ({formData.faqs.length})
+                </h4>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newFaq = {
+                      q: 'New Question for Recruiters / Clients?',
+                      a: 'Detailed answer explaining commercial leadership, availability, or capabilities.'
+                    };
+                    setFormData({
+                      ...formData,
+                      faqs: [...formData.faqs, newFaq]
+                    });
+                  }}
+                  className="btn-primary"
+                  style={{ padding: '7px 16px', fontSize: '0.84rem' }}
+                >
+                  <Plus size={14} />
+                  <span>Add New FAQ</span>
+                </button>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                {formData.faqs.map((faq, index) => (
+                  <div key={index} className="admin-item-card">
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                      <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--accent-orange)' }}>
+                        Question #{index + 1}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const updated = formData.faqs.filter((_, i) => i !== index);
+                          setFormData({ ...formData, faqs: updated });
+                        }}
+                        className="btn-danger-sm"
+                        title="Delete Question"
+                      >
+                        <Trash2 size={13} />
+                        <span>Delete</span>
+                      </button>
+                    </div>
+
+                    <div className="form-group" style={{ marginBottom: '10px' }}>
+                      <label className="form-label">Question</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={faq.q}
+                        onChange={(e) => {
+                          const updated = [...formData.faqs];
+                          updated[index].q = e.target.value;
+                          setFormData({ ...formData, faqs: updated });
+                        }}
+                      />
+                    </div>
+
+                    <div className="form-group" style={{ marginBottom: 0 }}>
+                      <label className="form-label">Answer</label>
+                      <textarea
+                        className="form-control"
+                        rows={3}
+                        value={faq.a}
+                        onChange={(e) => {
+                          const updated = [...formData.faqs];
+                          updated[index].a = e.target.value;
+                          setFormData({ ...formData, faqs: updated });
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         )}
 

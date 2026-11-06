@@ -24,6 +24,7 @@ export default function Home() {
   const { portfolioData } = usePortfolio();
   const {
     personalInfo,
+    contactSection,
     coreExpertise,
     commercialResults,
     awardsList,
@@ -574,11 +575,11 @@ export default function Home() {
               {/* Left Column: Direct Info */}
               <div className="contact-info-col">
                 <div className="section-tag" style={{ marginBottom: 0 }}>
-                  <span className="dot" /> Get In Touch
+                  <span className="dot" /> {contactSection?.homeBadge || 'Get In Touch'}
                 </div>
-                <h2>Let's Drive <span>Revenue & Growth</span> Together.</h2>
+                <h2>{contactSection?.homeTitle || "Let's Drive Revenue & Growth Together."}</h2>
                 <p>
-                  Whether you are expanding into international B2B markets, ramping outbound prospecting, or optimizing your commercial marketing engine, let’s connect.
+                  {contactSection?.homeDesc || "Whether you are expanding into international B2B markets, ramping outbound prospecting, or optimizing your commercial marketing engine, let’s connect."}
                 </p>
 
                 <div className="contact-channel-list">

@@ -25,6 +25,7 @@ export function PortfolioProvider({ children }) {
         const parsed = JSON.parse(saved);
         return {
           personalInfo: { ...defaultData.personalInfo, ...(parsed.personalInfo || {}) },
+          contactSection: { ...defaultData.contactSection, ...(parsed.contactSection || {}) },
           internationalExposure: parsed.internationalExposure || defaultData.internationalExposure,
           coreExpertise: parsed.coreExpertise || defaultData.coreExpertise,
           commercialResults: { ...defaultData.commercialResults, ...(parsed.commercialResults || {}) },
@@ -53,6 +54,7 @@ export function PortfolioProvider({ children }) {
       additionalExperience: defaultData.additionalExperience,
       toolsList: defaultData.toolsList,
       educationList: defaultData.educationList,
+      contactSection: defaultData.contactSection,
       faqs: defaultData.faqs,
       heroImage: '/images/vishmi-perera.jpg',
       activeThemeId: 'warm-orange',
@@ -102,6 +104,10 @@ export function PortfolioProvider({ children }) {
             commercialResults: {
               ...defaultData.commercialResults,
               ...(remoteData.content.commercialResults || {})
+            },
+            contactSection: {
+              ...defaultData.contactSection,
+              ...(remoteData.content.contactSection || {})
             }
           };
           setPortfolioData(merged);
@@ -234,6 +240,7 @@ export function PortfolioProvider({ children }) {
       additionalExperience: defaultData.additionalExperience,
       toolsList: defaultData.toolsList,
       educationList: defaultData.educationList,
+      contactSection: defaultData.contactSection,
       faqs: defaultData.faqs,
       heroImage: '/images/vishmi-perera.jpg',
       activeThemeId: 'warm-orange',

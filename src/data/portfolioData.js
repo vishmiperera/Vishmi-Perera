@@ -23,6 +23,26 @@ export const personalInfo = {
   ]
 };
 
+export const contactSection = {
+  badge: "Direct Channels",
+  title: "Let’s Start a Conversation",
+  subtitle: "Available for full-time leadership roles, international B2B sales development, go-to-market advisory, and strategic commercial consulting.",
+  channelTitle: "Reach Out Directly",
+  channelDesc: "I respond promptly to inquiries regarding commercial sales leadership, international expansion, and high-velocity outbound programs.",
+  homeBadge: "Get In Touch",
+  homeTitle: "Let's Drive Revenue & Growth Together.",
+  homeDesc: "Whether you are expanding into international B2B markets, ramping outbound prospecting, or optimizing your commercial marketing engine, let’s connect.",
+  timezoneNote: "GMT+5:30 • Flexible for UK/EU/US Hours",
+  inquirySubjects: [
+    "Executive Sales & Marketing Leadership Role",
+    "B2B Outbound Sales & Cold Calling Program",
+    "International GTM & Partnership Development",
+    "CRM Architecture, Reporting & AI Automation",
+    "Commercial Advisory / Consulting",
+    "Other / General Inquiries"
+  ]
+};
+
 export const internationalExposure = [
   { country: "United Kingdom", flag: "🇬🇧", type: "On-Site Work & Academic Foundation", note: "On-site commercial exposure + First-Class Honours Degree from Canterbury Christ Church University." },
   { country: "Netherlands", flag: "🇳🇱", type: "On-Site B2B Sales & Talent Program", note: "Sales Account Manager at Varuna Marine Services + AIESEC Netherlands Global Outgoing Talent." },
