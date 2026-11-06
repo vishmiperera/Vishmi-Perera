@@ -93,9 +93,8 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="hero-pill-badge"
           >
-            <span className="sparkle">✦</span>
+            <span className="dot" />
             <span>{personalInfo.role}</span>
-            <span className="sparkle">✦</span>
           </motion.div>
 
           {/* Main Title */}
@@ -105,7 +104,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="hero-title"
           >
-            I'm <span className="highlight">{personalInfo.name}<span className="asterisk">✦</span></span>
+            I'm <span className="highlight">{personalInfo.name}</span>
           </motion.h1>
 
           <motion.p
@@ -292,7 +291,7 @@ export default function Home() {
           <div className="section-header">
             <div>
               <div className="section-tag"><span className="dot" /> Core Expertise</div>
-              <h2 className="section-title">How I Drive Revenue & Growth <span className="sparkle">✦</span></h2>
+              <h2 className="section-title">How I Drive Revenue & Growth</h2>
               <p className="section-description">
                 High-impact B2B sales development, customer acquisition strategies, and commercial execution tailored for high-growth tech companies.
               </p>
@@ -430,7 +429,7 @@ export default function Home() {
           <div className="section-header">
             <div>
               <div className="section-tag"><span className="dot" /> Commercial Track Record</div>
-              <h2 className="section-title">Measurable Commercial Results <span className="sparkle">✦</span></h2>
+              <h2 className="section-title">Measurable Commercial Results</h2>
               <p className="section-description">
                 Proven revenue and pipeline acceleration delivered at {commercialResults.company} across <strong>{commercialResults.period}</strong>.
               </p>
@@ -485,7 +484,7 @@ export default function Home() {
           <div className="section-header">
             <div>
               <div className="section-tag"><span className="dot" /> Honors & Accolades</div>
-              <h2 className="section-title">Awards & Industry Recognition <span className="sparkle">✦</span></h2>
+              <h2 className="section-title">Awards & Industry Recognition</h2>
               <p className="section-description">
                 Prestigious industry honors celebrating product innovation, disruptive market presence, and rapid venture growth.
               </p>
@@ -526,7 +525,7 @@ export default function Home() {
         <div className="container">
           <div className="section-header" style={{ textAlign: 'center', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
             <div className="section-tag"><span className="dot" /> Technology Stack</div>
-            <h2 className="section-title">Tools & Platforms Mastered <span className="sparkle">✦</span></h2>
+            <h2 className="section-title">Tools & Platforms Mastered</h2>
             <p className="section-description" style={{ textAlign: 'center' }}>
               Enterprise CRM suites, paid advertising engines, automated workflows, and agile team management systems.
             </p>

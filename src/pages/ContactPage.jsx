@@ -254,7 +254,7 @@ export default function ContactPage() {
         <div className="container">
           <div className="section-header" style={{ textAlign: 'center', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
             <div className="section-tag"><span className="dot" /> Frequently Asked Questions</div>
-            <h2 className="section-title">Common Questions & Answers <span className="sparkle">✦</span></h2>
+            <h2 className="section-title">Common Questions & Answers</h2>
             <p className="section-description" style={{ textAlign: 'center' }}>
               Clarifications on international mobility, team leadership, and engagement models.
             </p>

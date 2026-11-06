@@ -101,7 +101,7 @@ export default function AboutPage() {
           <div className="section-header">
             <div>
               <div className="section-tag"><span className="dot" /> Global Mobility & Reach</div>
-              <h2 className="section-title">International Footprint <span className="sparkle">✦</span></h2>
+              <h2 className="section-title">International Footprint</h2>
               <p className="section-description">
                 Proven ability to adapt quickly, navigate diverse business cultures, and communicate seamlessly across multinational markets.
               </p>
@@ -129,7 +129,7 @@ export default function AboutPage() {
           <div className="section-header">
             <div>
               <div className="section-tag"><span className="dot" /> Qualifications</div>
-              <h2 className="section-title">Education & Credentials <span className="sparkle">✦</span></h2>
+              <h2 className="section-title">Education & Credentials</h2>
               <p className="section-description">
                 A strong foundation in business management, economics, strategic marketing, and organizational leadership.
               </p>
@@ -160,7 +160,7 @@ export default function AboutPage() {
         <div className="container">
           <div className="section-header" style={{ textAlign: 'center', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
             <div className="section-tag" style={{ color: 'var(--accent-orange)' }}><span className="dot" /> Core Philosophy</div>
-            <h2 className="section-title" style={{ color: '#FFFFFF' }}>How I Approach Commercial Leadership <span className="sparkle">✦</span></h2>
+            <h2 className="section-title" style={{ color: '#FFFFFF' }}>How I Approach Commercial Leadership</h2>
             <p className="section-description" style={{ color: 'rgba(255,255,255,0.7)', textAlign: 'center' }}>
               Three foundational pillars that guide my work across tech startups and established enterprises.
             </p>

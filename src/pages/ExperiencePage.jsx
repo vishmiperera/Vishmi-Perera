@@ -36,7 +36,7 @@ export default function ExperiencePage() {
           <div className="section-header">
             <div>
               <div className="section-tag"><span className="dot" /> Case Study Impact</div>
-              <h2 className="section-title">{commercialResults.company} Growth Analysis <span className="sparkle">✦</span></h2>
+              <h2 className="section-title">{commercialResults.company} Growth Analysis</h2>
               <p className="section-description">
                 Key commercial milestones delivered across <strong>{commercialResults.period}</strong> through collaborative cross-functional execution.
               </p>
@@ -84,7 +84,7 @@ export default function ExperiencePage() {
           <div className="section-header">
             <div>
               <div className="section-tag"><span className="dot" /> Chronological Timeline</div>
-              <h2 className="section-title">Professional Experience <span className="sparkle">✦</span></h2>
+              <h2 className="section-title">Professional Experience</h2>
               <p className="section-description">
                 Chronological history of leadership and B2B sales roles across global technology organizations.
               </p>
@@ -127,7 +127,7 @@ export default function ExperiencePage() {
           <div className="section-header">
             <div>
               <div className="section-tag"><span className="dot" /> Global Engagements</div>
-              <h2 className="section-title">Specialized International Exposure <span className="sparkle">✦</span></h2>
+              <h2 className="section-title">Specialized International Exposure</h2>
               <p className="section-description">
                 Partner management, overseas talent initiatives, and British on-site commercial exposure.
               </p>

@@ -18,7 +18,7 @@ export default function MarqueeStrip() {
         {items.concat(items).map((text, idx) => (
           <div key={idx} className="ticker-item">
             <span>{text}</span>
-            <span className="sparkle">✦</span>
+            <span className="ticker-bullet" style={{ color: 'var(--accent-orange)', opacity: 0.7, margin: '0 8px' }}>•</span>
           </div>
         ))}
       </div>

@@ -34,7 +34,7 @@ export default function ServicesPage() {
           <div className="section-header">
             <div>
               <div className="section-tag"><span className="dot" /> Service Directory</div>
-              <h2 className="section-title">Core Expertise In Action <span className="sparkle">✦</span></h2>
+              <h2 className="section-title">Core Expertise In Action</h2>
               <p className="section-description">
                 Click any service card below to inspect scope of deliverables, methodology, and tools applied.
               </p>
@@ -111,7 +111,7 @@ export default function ServicesPage() {
         <div className="container">
           <div className="section-header" style={{ textAlign: 'center', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
             <div className="section-tag"><span className="dot" /> Structured Execution</div>
-            <h2 className="section-title">The Commercial Delivery Framework <span className="sparkle">✦</span></h2>
+            <h2 className="section-title">The Commercial Delivery Framework</h2>
             <p className="section-description" style={{ textAlign: 'center' }}>
               A tested 4-stage methodology to evaluate, build, execute, and scale commercial revenue engines.
             </p>

@@ -497,6 +497,13 @@ ul, ol {
 }
 
 /* Main Display Title */
+.sparkle,
+.asterisk,
+.section-title .sparkle,
+.hero-pill-badge .sparkle {
+  display: none !important;
+}
+
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(2.4rem, 5.5vw, 4.4rem);
@@ -1006,7 +1013,7 @@ ul, ol {
   color: rgba(255, 255, 255, 0.9);
 }
 
-.ticker-item .sparkle {
+.ticker-item .ticker-bullet {
   color: var(--accent-orange);
   font-size: 1.1rem;
 }
@@ -1054,9 +1061,10 @@ ul, ol {
   color: var(--text-main);
 }
 
-.section-title .sparkle {
-  color: var(--accent-orange);
-  font-weight: 400;
+.section-title .sparkle,
+.sparkle,
+.asterisk {
+  display: none !important;
 }
 
 .section-description {
@@ -1525,12 +1533,13 @@ ul, ol {
 }
 
 .timeline-bullet-item::before {
-  content: '✦';
+  content: '•';
   position: absolute;
   left: 0;
   top: 1px;
   color: var(--accent-orange);
-  font-size: 0.85rem;
+  font-size: 1.1rem;
+  line-height: 1;
 }
 
 /* --- Awards & Recognition Section --- */

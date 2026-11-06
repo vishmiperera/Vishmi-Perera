@@ -516,8 +516,12 @@ body.cursor-hover .cursor-dot {
   margin-bottom: 20px;
 }
 
-.hero-pill-badge .sparkle {
-  color: var(--accent-orange);
+.hero-pill-badge .sparkle,
+.hero-title .asterisk,
+.section-title .sparkle,
+.sparkle,
+.asterisk {
+  display: none !important;
 }
 
 .hero-title {
@@ -534,15 +538,6 @@ body.cursor-hover .cursor-dot {
   color: var(--accent-orange);
   position: relative;
   display: inline-block;
-}
-
-.hero-title .asterisk {
-  color: var(--accent-orange);
-  font-weight: 400;
-  display: inline-block;
-  font-size: 0.85em;
-  vertical-align: top;
-  margin-left: 2px;
 }
 
 .hero-subtitle {
@@ -989,7 +984,7 @@ body.cursor-hover .cursor-dot {
   color: rgba(255, 255, 255, 0.9);
 }
 
-.ticker-item .sparkle {
+.ticker-item .ticker-bullet {
   color: var(--accent-orange);
   font-size: 1.1rem;
 }
@@ -1037,9 +1032,10 @@ body.cursor-hover .cursor-dot {
   color: var(--text-main);
 }
 
-.section-title .sparkle {
-  color: var(--accent-orange);
-  font-weight: 400;
+.section-title .sparkle,
+.sparkle,
+.asterisk {
+  display: none !important;
 }
 
 .section-description {
@@ -1491,12 +1487,13 @@ body.cursor-hover .cursor-dot {
 }
 
 .timeline-bullet-item::before {
-  content: '✦';
+  content: '•';
   position: absolute;
   left: 0;
   top: 1px;
   color: var(--accent-orange);
-  font-size: 0.85rem;
+  font-size: 1.1rem;
+  line-height: 1;
 }
 
 /* Awards */
