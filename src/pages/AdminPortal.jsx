@@ -30,7 +30,9 @@ import {
   Copy,
   Image as ImageIcon,
   FileCode,
-  Download
+  Download,
+  FileText,
+  FileDown
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { themePresets } from '../data/themePresets';
@@ -119,6 +121,51 @@ export default function AdminPortal() {
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  // CV Upload Handler
+  const handleCvUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 8 * 1024 * 1024) {
+        alert('File size exceeds 8MB. Please select a CV/Resume under 8MB.');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const sizeFormatted = file.size > 1024 * 1024
+          ? (file.size / (1024 * 1024)).toFixed(2) + ' MB'
+          : (file.size / 1024).toFixed(1) + ' KB';
+
+        setFormData({
+          ...formData,
+          personalInfo: {
+            ...formData.personalInfo,
+            cvUrl: reader.result,
+            cvFileName: file.name,
+            cvFileSize: sizeFormatted,
+            cvLastUpdated: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+          }
+        });
+        setSaveSuccess(true);
+        setTimeout(() => setSaveSuccess(false), 4000);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Reset CV to default generated PDF
+  const handleResetCv = () => {
+    setFormData({
+      ...formData,
+      personalInfo: {
+        ...formData.personalInfo,
+        cvUrl: '/cv/Vishmi_Perera_CV.pdf',
+        cvFileName: 'Vishmi_Perera_CV.pdf',
+        cvFileSize: '10.5 KB',
+        cvLastUpdated: 'Default PDF'
+      }
+    });
   };
 
   // Supabase Connect Action
@@ -928,6 +975,111 @@ export const faqs = ${JSON.stringify(formData.faqs, null, 2)};
                     </button>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Executive CV & Resume Management Card */}
+            <div style={{ marginTop: '24px', padding: '22px', background: 'var(--bg-primary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px', marginBottom: '14px' }}>
+                <label className="form-label" style={{ fontSize: '1.05rem', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <FileText size={18} style={{ color: 'var(--accent-orange)' }} />
+                  Executive CV & Resume Management
+                </label>
+                <span style={{ fontSize: '0.8rem', padding: '4px 10px', borderRadius: '12px', background: 'rgba(16, 185, 129, 0.15)', color: '#10B981', fontWeight: 600 }}>
+                  Active & Downloadable
+                </span>
+              </div>
+
+              {/* Status Box */}
+              <div style={{ padding: '16px 20px', background: 'var(--bg-secondary)', borderRadius: '10px', marginBottom: '16px', border: '1px solid var(--border-light)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+                  <div style={{ width: '44px', height: '44px', borderRadius: '10px', background: 'var(--dark-primary)', color: 'var(--accent-orange)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <FileDown size={22} />
+                  </div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: '0.98rem', color: 'var(--text-main)' }}>
+                      {formData.personalInfo.cvFileName || 'Vishmi_Perera_CV.pdf'}
+                    </div>
+                    <div style={{ fontSize: '0.83rem', color: 'var(--text-muted)' }}>
+                      Size: {formData.personalInfo.cvFileSize || '10.5 KB'} • Status: {formData.personalInfo.cvLastUpdated || 'Default Generated CV'}
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                  <a
+                    href={formData.personalInfo.cvUrl || '/cv/Vishmi_Perera_CV.pdf'}
+                    download={formData.personalInfo.cvFileName || 'Vishmi_Perera_CV.pdf'}
+                    className="btn-secondary"
+                    style={{ padding: '8px 16px', fontSize: '0.85rem' }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Download size={14} />
+                    <span>Test Download</span>
+                  </a>
+
+                  <Link
+                    to="/resume"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary"
+                    style={{ padding: '8px 16px', fontSize: '0.85rem' }}
+                  >
+                    <Eye size={14} />
+                    <span>View Online Resume</span>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Action Buttons & File Picker */}
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <label className="btn-primary" style={{ padding: '9px 18px', fontSize: '0.88rem', cursor: 'pointer' }}>
+                  <Upload size={15} />
+                  <span>Upload New CV (PDF / Word)</span>
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx,application/pdf"
+                    onChange={handleCvUpload}
+                    style={{ display: 'none' }}
+                  />
+                </label>
+
+                <button
+                  type="button"
+                  onClick={handleResetCv}
+                  className="btn-secondary"
+                  style={{ padding: '9px 18px', fontSize: '0.88rem' }}
+                >
+                  <RotateCcw size={15} />
+                  <span>Reset to Default CV</span>
+                </button>
+              </div>
+
+              {/* Optional Custom External Link */}
+              <div style={{ marginTop: '16px' }}>
+                <label className="form-label" style={{ fontSize: '0.85rem' }}>
+                  Or Custom External Resume Link (Google Drive / Dropbox / Cloud CDN)
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="https://drive.google.com/file/d/... or custom URL"
+                  value={formData.personalInfo.cvUrl?.startsWith('data:') ? '' : (formData.personalInfo.cvUrl || '')}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    personalInfo: {
+                      ...formData.personalInfo,
+                      cvUrl: e.target.value,
+                      cvFileName: e.target.value ? 'External_Resume_Document' : 'Vishmi_Perera_CV.pdf'
+                    }
+                  })}
+                />
+                <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '4px', display: 'block' }}>
+                  {formData.personalInfo.cvUrl?.startsWith('data:')
+                    ? 'A custom file is uploaded directly (stored safely in application storage & Supabase sync).'
+                    : 'If left default, the official generated executive PDF is served.'}
+                </span>
               </div>
             </div>
 

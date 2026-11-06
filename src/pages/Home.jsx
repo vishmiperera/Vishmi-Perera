@@ -14,7 +14,8 @@ import {
   Linkedin,
   Mail,
   Phone,
-  MessageSquare
+  MessageSquare,
+  FileDown
 } from 'lucide-react';
 import MarqueeStrip from '../components/MarqueeStrip';
 import { usePortfolio } from '../context/PortfolioContext';
@@ -261,6 +262,17 @@ export default function Home() {
                 <ArrowRight size={14} />
               </div>
             </Link>
+
+            <a
+              href={personalInfo.cvUrl || '/cv/Vishmi_Perera_CV.pdf'}
+              download={personalInfo.cvFileName || 'Vishmi_Perera_CV.pdf'}
+              className="btn-secondary"
+              title="Download Vishmi's CV (PDF)"
+            >
+              <FileDown size={18} color="var(--accent-orange)" />
+              <span>Download CV</span>
+            </a>
+
             <Link to="/contact" className="btn-secondary">
               <CalendarCheck size={18} color="var(--accent-orange)" />
               <span>Let's Talk</span>

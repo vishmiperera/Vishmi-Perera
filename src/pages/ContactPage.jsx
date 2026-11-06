@@ -10,7 +10,8 @@ import {
   Clock,
   Send,
   CheckCircle2,
-  ArrowUpRight
+  ArrowUpRight,
+  FileDown
 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 
@@ -134,6 +135,25 @@ export default function ContactPage() {
                       <div className="channel-label">Primary Timezone</div>
                       <div className="channel-val">{personalInfo.location} (GMT+5:30) • Flexible for UK/EU/US Hours</div>
                     </div>
+                  </div>
+
+                  {/* CV Download Card */}
+                  <div style={{ marginTop: '20px', padding: '18px', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
+                    <div style={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', color: 'var(--accent-orange)', marginBottom: '6px' }}>
+                      Official Credentials
+                    </div>
+                    <div style={{ fontSize: '0.9rem', color: 'var(--text-main)', marginBottom: '14px', fontWeight: 500 }}>
+                      Download Vishmi's complete executive curriculum vitae ({personalInfo.cvFileSize || 'PDF'}).
+                    </div>
+                    <a
+                      href={personalInfo.cvUrl || '/cv/Vishmi_Perera_CV.pdf'}
+                      download={personalInfo.cvFileName || 'Vishmi_Perera_CV.pdf'}
+                      className="btn-primary"
+                      style={{ width: '100%', justifyContent: 'center', padding: '10px 18px', fontSize: '0.9rem' }}
+                    >
+                      <FileDown size={16} />
+                      <span>Download Full CV</span>
+                    </a>
                   </div>
                 </div>
               </div>

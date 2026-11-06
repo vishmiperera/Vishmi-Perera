@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Zap, Moon, Sun, ArrowRight, Linkedin, Mail, Phone, Lock, Unlock } from 'lucide-react';
+import { Zap, Moon, Sun, ArrowRight, Linkedin, Mail, Phone, Lock, Unlock, FileDown } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { usePortfolio } from '../context/PortfolioContext';
 
@@ -102,6 +102,17 @@ export default function Navbar() {
               {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
             </button>
 
+            {/* Download CV Action Button */}
+            <a
+              href={personalInfo.cvUrl || '/cv/Vishmi_Perera_CV.pdf'}
+              download={personalInfo.cvFileName || 'Vishmi_Perera_CV.pdf'}
+              className="btn-cv-nav"
+              title="Download Vishmi's CV (PDF)"
+            >
+              <FileDown size={14} />
+              <span>CV</span>
+            </a>
+
             {/* CTA Button */}
             <Link to="/contact" className="btn-cta-nav">
               <span>Let's Talk</span>
@@ -154,6 +165,17 @@ export default function Navbar() {
           >
             {isAdminAuthenticated ? 'Admin Portal (Active)' : 'Admin Portal 🔒'}
           </NavLink>
+
+          <a
+            href={personalInfo.cvUrl || '/cv/Vishmi_Perera_CV.pdf'}
+            download={personalInfo.cvFileName || 'Vishmi_Perera_CV.pdf'}
+            onClick={closeMobileMenu}
+            className="mobile-nav-link"
+            style={{ fontSize: '1.2rem', color: 'var(--accent-orange)', display: 'flex', alignItems: 'center', gap: '8px' }}
+          >
+            <FileDown size={20} />
+            <span>Download CV (PDF)</span>
+          </a>
         </div>
 
         <div className="mobile-drawer-footer">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, CheckCircle2, ArrowRight, Mail, CalendarCheck, Target, GitMerge, BarChart2 } from 'lucide-react';
+import { ChevronRight, CheckCircle2, ArrowRight, Mail, CalendarCheck, Target, GitMerge, BarChart2, FileDown } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 
 export default function AboutPage() {
@@ -68,8 +68,17 @@ export default function AboutPage() {
               </p>
 
               <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginTop: '10px' }}>
-                <Link to="/contact" className="btn-primary" style={{ background: 'var(--accent-orange)', color: '#FFFFFF' }}>
-                  <span>Schedule an Interview / Chat</span>
+                <a
+                  href={personalInfo.cvUrl || '/cv/Vishmi_Perera_CV.pdf'}
+                  download={personalInfo.cvFileName || 'Vishmi_Perera_CV.pdf'}
+                  className="btn-primary"
+                  style={{ background: 'var(--accent-orange)', color: '#FFFFFF', display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+                >
+                  <FileDown size={16} />
+                  <span>Download Executive CV</span>
+                </a>
+                <Link to="/contact" className="btn-secondary" style={{ background: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,255,255,0.15)', color: '#FFFFFF' }}>
+                  <span>Schedule an Interview</span>
                   <CalendarCheck size={16} />
                 </Link>
                 <a

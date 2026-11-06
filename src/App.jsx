@@ -15,6 +15,7 @@ import AboutPage from './pages/AboutPage';
 import AwardsPage from './pages/AwardsPage';
 import ContactPage from './pages/ContactPage';
 import AdminPortal from './pages/AdminPortal';
+import ResumePage from './pages/ResumePage';
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
               <Route path="/awards" element={<AwardsPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/admin" element={<AdminPortal />} />
+              <Route path="/resume" element={<ResumePage />} />
             </Routes>
           </main>
           <Footer />
