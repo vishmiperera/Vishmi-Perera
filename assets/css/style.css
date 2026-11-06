@@ -214,13 +214,14 @@ ul, ol {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
   background: var(--dark-primary);
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
   border-radius: var(--radius-pill);
-  padding: 8px 10px 8px 18px;
+  padding: 8px 12px 8px 18px;
   width: 100%;
-  max-width: 960px;
+  max-width: 1140px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
@@ -234,11 +235,12 @@ ul, ol {
   font-size: 1.25rem;
   color: #FFFFFF;
   letter-spacing: -0.02em;
+  flex-shrink: 0;
 }
 
 .brand-icon {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: var(--accent-orange);
   display: flex;
@@ -247,6 +249,7 @@ ul, ol {
   color: #FFFFFF;
   font-size: 0.95rem;
   box-shadow: 0 2px 10px var(--accent-orange-glow);
+  flex-shrink: 0;
 }
 
 .brand-text span {
@@ -256,17 +259,22 @@ ul, ol {
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex-shrink: 1;
 }
 
 .nav-link {
   color: rgba(255, 255, 255, 0.7);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 500;
-  padding: 8px 16px;
+  padding: 7px 13px;
   border-radius: var(--radius-pill);
   transition: color var(--transition-fast), background var(--transition-fast);
   position: relative;
+  white-space: nowrap;
 }
 
 .nav-link:hover {

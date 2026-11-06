@@ -27,7 +27,7 @@ export default function Navbar() {
     { label: 'Home', path: '/' },
     { label: 'Services', path: '/services' },
     { label: 'Experience', path: '/experience' },
-    { label: 'About Me', path: '/about' },
+    { label: 'About', path: '/about' },
     { label: 'Awards', path: '/awards' },
     { label: 'Contact', path: '/contact' },
   ];
