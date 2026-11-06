@@ -93,11 +93,23 @@ export function PortfolioProvider({ children }) {
       try {
         const remoteData = await fetchPortfolioFromSupabase();
         if (remoteData && remoteData.content) {
-          setPortfolioData(prev => ({
-            ...prev,
-            ...remoteData.content
-          }));
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(remoteData.content));
+          const merged = {
+            ...remoteData.content,
+            personalInfo: {
+              ...defaultData.personalInfo,
+              ...(remoteData.content.personalInfo || {})
+            },
+            commercialResults: {
+              ...defaultData.commercialResults,
+              ...(remoteData.content.commercialResults || {})
+            }
+          };
+          setPortfolioData(merged);
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(merged));
+          } catch (storageErr) {
+            console.warn('Storage quota warning', storageErr);
+          }
           setIsSupabaseConnected(true);
           setSyncStatus('saved');
           setLastSyncedAt(remoteData.updatedAt || new Date().toISOString());

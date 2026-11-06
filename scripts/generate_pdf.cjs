@@ -199,3 +199,4 @@ function createPdf(outputPath) {
 
 const targetPath = path.join(__dirname, '..', 'public', 'cv', 'Vishmi_Perera_CV.pdf');
 createPdf(targetPath);
+
